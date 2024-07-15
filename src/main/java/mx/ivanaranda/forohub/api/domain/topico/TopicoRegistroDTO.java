@@ -7,6 +7,6 @@ public record TopicoRegistroDTO(
         @NotBlank String titulo
         , @NotBlank String mensaje
         , @NotNull Long idUsuario
-        , @NotNull  Curso curso
+        , @NotNull Curso curso
 ) {
 }

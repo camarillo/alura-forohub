@@ -1,10 +1,7 @@
 package mx.ivanaranda.forohub.api.controller;
 
 import jakarta.validation.Valid;
-import mx.ivanaranda.forohub.api.domain.topico.TopicoListadoDTO;
-import mx.ivanaranda.forohub.api.domain.topico.TopicoRegistroDTO;
-import mx.ivanaranda.forohub.api.domain.topico.TopicoRespuestaDTO;
-import mx.ivanaranda.forohub.api.domain.topico.TopicoService;
+import mx.ivanaranda.forohub.api.domain.topico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,6 +34,12 @@ public class TopicoController {
     @RequestMapping("/top10")
     public ResponseEntity<List<TopicoListadoDTO>> listarTop10(){
         return ResponseEntity.ok(topicoService.listarTop10());
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TopicoDetalleDTO> detalle(@PathVariable("id") Long idTopico){
+        return ResponseEntity.ok(topicoService.detalle(idTopico));
 
     }
 }

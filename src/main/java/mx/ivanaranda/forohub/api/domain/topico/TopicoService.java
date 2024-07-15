@@ -25,4 +25,8 @@ public class TopicoService {
     public List<TopicoListadoDTO> listarTop10() {
         return topicoRepository.findTop10ByOrderByFechaDesc().stream().map(TopicoListadoDTO::new).toList();
     }
+
+    public TopicoDetalleDTO detalle(Long idTopico) {
+        return new TopicoDetalleDTO(topicoRepository.getReferenceById(idTopico));
+    }
 }
