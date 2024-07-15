@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -21,9 +22,14 @@ public class TopicoController {
     private TopicoService topicoService;
 
     @PostMapping
-    public ResponseEntity<TopicoRespuestaDTO> registrar(@RequestBody @Valid TopicoRegistroDTO topicoRegistroDTO){
+    public ResponseEntity<TopicoRespuestaDTO> registrar(
+            @RequestBody @Valid TopicoRegistroDTO topicoRegistroDTO
+            , UriComponentsBuilder uriComponentsBuilder
+
+    ){
         TopicoRespuestaDTO topicoRespuestaDTO = topicoService.registrar(topicoRegistroDTO);
-        return ResponseEntity.ok(topicoRespuestaDTO);
+        URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topicoRespuestaDTO.id()).toUri();
+        return ResponseEntity.created(url).body(topicoRespuestaDTO);
     }
 
     @PutMapping("/{id}")
