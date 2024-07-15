@@ -3,6 +3,8 @@ package mx.ivanaranda.forohub.api.infra.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import mx.ivanaranda.forohub.api.domain.usuarios.Usuario;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,27 @@ public class TokenService {
             // Invalid Signing configuration / Couldn't convert Claims.
             throw new RuntimeException();
         }
+    }
+
+    public String getSubject(String token){
+        if (token == null){
+            throw new RuntimeException();
+        }
+        DecodedJWT verifier = null;
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(apiSecret);
+            verifier = JWT.require(algorithm)
+                    .withIssuer("forohub")
+                    .build()
+                    .verify(token);
+            verifier.getSubject();
+        } catch (JWTVerificationException exception){
+            System.out.println(exception.toString());
+        }
+        if (verifier == null || verifier.getSubject() == null){
+            throw new RuntimeException("Verifier invalido");
+        }
+        return verifier.getSubject();
     }
 
     private Instant generarFechaExpiracion(){
