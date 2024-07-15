@@ -1,6 +1,8 @@
 package mx.ivanaranda.forohub.api.domain.topico;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +18,7 @@ public class TopicoService {
         return new TopicoRespuestaDTO(topico);
     }
 
-    public List<TopicoListadoDTO> listar() {
-        return topicoRepository.findAllByOrderByFechaDesc().stream().map(TopicoListadoDTO::new).toList();
+    public Page<TopicoListadoDTO> listar(Pageable paginacion) {
+        return topicoRepository.findAll(paginacion).map(TopicoListadoDTO::new);
     }
 }

@@ -6,6 +6,9 @@ import mx.ivanaranda.forohub.api.domain.topico.TopicoRegistroDTO;
 import mx.ivanaranda.forohub.api.domain.topico.TopicoRespuestaDTO;
 import mx.ivanaranda.forohub.api.domain.topico.TopicoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +29,7 @@ public class TopicoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TopicoListadoDTO>> listar(){
-        return ResponseEntity.ok(topicoService.listar());
+    public ResponseEntity<Page<TopicoListadoDTO>> listar(@PageableDefault(size = 5) Pageable paginacion){
+        return ResponseEntity.ok(topicoService.listar(paginacion));
     }
 }
