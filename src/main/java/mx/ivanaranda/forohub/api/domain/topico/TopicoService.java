@@ -17,7 +17,6 @@ public class TopicoService {
     }
 
     public List<TopicoListadoDTO> listar() {
-        List<TopicoListadoDTO> topicos = topicoRepository.findAll().stream().map(TopicoListadoDTO::new).toList();
-        return topicos;
+        return topicoRepository.findAllByOrderByFechaDesc().stream().map(TopicoListadoDTO::new).toList();
     }
 }
