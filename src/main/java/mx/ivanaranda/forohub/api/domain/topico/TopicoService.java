@@ -21,4 +21,8 @@ public class TopicoService {
     public Page<TopicoListadoDTO> listar(Pageable paginacion) {
         return topicoRepository.findAll(paginacion).map(TopicoListadoDTO::new);
     }
+
+    public List<TopicoListadoDTO> listarTop10() {
+        return topicoRepository.findTop10ByOrderByFechaDesc().stream().map(TopicoListadoDTO::new).toList();
+    }
 }

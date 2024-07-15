@@ -32,4 +32,11 @@ public class TopicoController {
     public ResponseEntity<Page<TopicoListadoDTO>> listar(@PageableDefault(size = 5) Pageable paginacion){
         return ResponseEntity.ok(topicoService.listar(paginacion));
     }
+
+    @GetMapping
+    @RequestMapping("/top10")
+    public ResponseEntity<List<TopicoListadoDTO>> listarTop10(){
+        return ResponseEntity.ok(topicoService.listarTop10());
+
+    }
 }
