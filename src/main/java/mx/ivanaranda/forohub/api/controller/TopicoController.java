@@ -35,6 +35,12 @@ public class TopicoController {
         return ResponseEntity.ok(topicoRespuestaDTO);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<TopicoRespuestaDTO> eliminar(@PathVariable("id") Long idTopico){
+        topicoService.eliminar(idTopico);
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping
     public ResponseEntity<Page<TopicoListadoDTO>> listar(@PageableDefault(size = 5) Pageable paginacion){

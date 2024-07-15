@@ -42,4 +42,13 @@ public class TopicoService {
             return null;
         }
     }
+
+    public void eliminar(Long idTopico) {
+        Optional<Topico> topicoBuscado = topicoRepository.findById(idTopico);
+        if (topicoBuscado.isPresent()) {
+            topicoRepository.deleteById(idTopico);
+        } else {
+            System.out.println("El topico " + idTopico + " no existe");
+        }
+    }
 }
