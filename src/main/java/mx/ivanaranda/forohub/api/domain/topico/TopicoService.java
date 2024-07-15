@@ -3,6 +3,8 @@ package mx.ivanaranda.forohub.api.domain.topico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TopicoService {
     @Autowired
@@ -12,5 +14,10 @@ public class TopicoService {
         Topico topico = new Topico(topicoRegistroDTO);
         topicoRepository.save(topico);
         return new TopicoRespuestaDTO(topico);
+    }
+
+    public List<TopicoListadoDTO> listar() {
+        List<TopicoListadoDTO> topicos = topicoRepository.findAll().stream().map(TopicoListadoDTO::new).toList();
+        return topicos;
     }
 }

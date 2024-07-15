@@ -1,6 +1,7 @@
 package mx.ivanaranda.forohub.api.controller;
 
 import jakarta.validation.Valid;
+import mx.ivanaranda.forohub.api.domain.topico.TopicoListadoDTO;
 import mx.ivanaranda.forohub.api.domain.topico.TopicoRegistroDTO;
 import mx.ivanaranda.forohub.api.domain.topico.TopicoRespuestaDTO;
 import mx.ivanaranda.forohub.api.domain.topico.TopicoService;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/topicos")
@@ -21,5 +23,10 @@ public class TopicoController {
     public ResponseEntity<TopicoRespuestaDTO> registrar(@RequestBody @Valid TopicoRegistroDTO topicoRegistroDTO){
         TopicoRespuestaDTO topicoRespuestaDTO = topicoService.registrar(topicoRegistroDTO);
         return ResponseEntity.ok(topicoRespuestaDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TopicoListadoDTO>> listar(){
+        return ResponseEntity.ok(topicoService.listar());
     }
 }
