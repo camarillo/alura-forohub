@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TopicoRepository extends JpaRepository<Topico, Long> {
     public List<Topico> findTop10ByOrderByFechaDesc();
+
+    Boolean existsByTituloAndMensaje(String titulo, String mensaje);
 }

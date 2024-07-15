@@ -1,5 +1,6 @@
 package mx.ivanaranda.forohub.api.domain.topico;
 
+import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,10 @@ public class TopicoService {
     private TopicoRepository topicoRepository;
 
     public TopicoRespuestaDTO registrar(TopicoRegistroDTO topicoRegistroDTO){
+        if (topicoRepository.existsByTituloAndMensaje(topicoRegistroDTO.titulo(), topicoRegistroDTO.mensaje())){
+            throw new ValidationException("Ya existe un topico con el mensaje y titulo enviado");
+        }
+
         Topico topico = new Topico(topicoRegistroDTO);
         topicoRepository.save(topico);
         return new TopicoRespuestaDTO(topico);
