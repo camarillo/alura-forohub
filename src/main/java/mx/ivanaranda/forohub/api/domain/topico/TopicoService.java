@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TopicoService {
@@ -28,5 +29,17 @@ public class TopicoService {
 
     public TopicoDetalleDTO detalle(Long idTopico) {
         return new TopicoDetalleDTO(topicoRepository.getReferenceById(idTopico));
+    }
+
+    public TopicoRespuestaDTO actualizar(Long idTopico, TopicoRegistroDTO topicoRegistroDTO) {
+        Optional<Topico> topicoBuscado = topicoRepository.findById(idTopico);
+        if (topicoBuscado.isPresent()) {
+            Topico topico = topicoBuscado.get();
+            topico.actualizarDatos(topicoRegistroDTO);
+            return new TopicoRespuestaDTO(topico);
+        } else {
+            System.out.println("El topico " + idTopico + " no existe");
+            return null;
+        }
     }
 }

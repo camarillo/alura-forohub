@@ -37,4 +37,19 @@ public class Topico {
         this.curso = dto.curso();
         this.respuestas = 0;
     }
+
+    public void actualizarDatos(TopicoRegistroDTO dto){
+        if (dto.titulo() != null){
+            this.titulo = dto.titulo();
+        }
+        if (dto.mensaje() != null){
+            this.mensaje = dto.mensaje();
+        }
+        if (dto.idUsuario() != null){
+            this.idUsuario = dto.idUsuario();
+        }
+        if (dto.curso() != null){
+            this.curso = dto.curso();
+        }
+    }
 }
