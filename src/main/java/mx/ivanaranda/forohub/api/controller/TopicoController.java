@@ -55,8 +55,7 @@ public class TopicoController {
         return ResponseEntity.ok(topicoService.listar(paginacion));
     }
 
-    @GetMapping
-    @RequestMapping("/top10")
+    @GetMapping("/top10")
     public ResponseEntity<List<TopicoListadoDTO>> listarTop10(){
         return ResponseEntity.ok(topicoService.listarTop10());
     }
