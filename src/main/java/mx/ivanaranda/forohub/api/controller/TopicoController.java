@@ -1,5 +1,6 @@
 package mx.ivanaranda.forohub.api.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import mx.ivanaranda.forohub.api.domain.topico.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
 
     @Autowired
